@@ -70,7 +70,7 @@ class TournamentHelper(commands.Cog):
         global TEAMS
         embed = discord.Embed(
             title="Tournament Bracket",
-            description="You can find the official bracket [here!](https://challonge.com/a4bm15od)",
+            description="You can find the official bracket [here!](https://challonge.com/)",
             color=discord.Color.red()
         )
 
@@ -118,7 +118,7 @@ class BanPhase(commands.Cog):
         # Scope for sheets & drive
         scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
         # Load credentials from .json file
-        creds = ServiceAccountCredentials.from_json_keyfile_name("C:\\Users\\LadyD\\AppData\\Local\\Programs\\Python\\Python312\\Projects\\HotsCalc\\snipey-bfcd3543a260.json", scope)
+        creds = ServiceAccountCredentials.from_json_keyfile_name("C:\\Users\\LadyD\\AppData\\Local\\Programs\\Python\\Python312\\Projects\\Tournament Helper\\snipey-bfcd3543a260.json", scope)
         client = gspread.authorize(creds)  # Authorize client to interact with sheets
         sheet = client.open("Snipey data")  # Open specific sheet
         worksheet = sheet.get_worksheet(2)  # Access the third worksheet
@@ -134,7 +134,7 @@ class BanPhase(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command()
-    @commands.has_any_role("Captains", "Ravinar", "Ellixya")
+    @commands.has_any_role("")
     async def flip(self, ctx: commands.Context):
         global ALLOWED_CHANNELS_CAPTAINS
         if ctx.channel.id not in ALLOWED_CHANNELS_CAPTAINS:
@@ -145,7 +145,7 @@ class BanPhase(commands.Cog):
     '''
     #this ban command allows a moderator to use by tagging both users. for non-mod command, see the alternate ban command. Don't forget to comment out the other ban command though!
     @commands.command() 
-    @commands.has_any_role("Captains", "Ravinar", "Ellixya")
+    @commands.has_any_role("")
     async def bans(self, ctx: commands.Context, user1: discord.Member, user2: discord.Member):
         global TEAMS
         global ALLOWED_CHANNELS_CAPTAINS
@@ -446,8 +446,6 @@ class MatchReporting(commands.Cog):
         self.bot = bot
         self.sheet = self.auth_google_sheets()
         self.worksheet = self.sheet
-                                        # my testing channel | drafting channel 
-        self.ALLOWED_CHANNELS_CAPTAINS = [1290751062256648212, 1300568326606422086]
         self.load_bracket_state()
 
     @commands.Cog.listener() # Command to return an error if the user doesn't have required roles for command.
@@ -537,12 +535,13 @@ class MatchReporting(commands.Cog):
             print(f"Error loading bracket state: {e}")
 
     @commands.command()
-    @commands.has_any_role("Captains", "Ravinar", "Ellixya")
+    @commands.has_any_role("")
     async def report(self, ctx, team1: str, score: str, team2: str):
         global TEAMS
         global active_series
         global BRACKET
-        if ctx.channel.id not in self.ALLOWED_CHANNELS_CAPTAINS:
+        global ALLOWED_CHANNELS_CAPTAINS
+        if ctx.channel.id not in ALLOWED_CHANNELS_CAPTAINS:
             await ctx.send(f"{ctx.author.mention}, this command can only be used in the `#-drafting-and-match-reporting` channel.")
             return   
         self.load_bracket_state()
