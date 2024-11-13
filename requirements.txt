@@ -1,0 +1,7 @@
+discord.py==2.1.0  # For discord and discord.ext.commands
+python-dotenv  # For dotenv
+gspread  # For Google Sheets integration
+oauth2client  # For Google OAuth authentication
+asyncio
+re
+random
