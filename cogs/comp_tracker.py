@@ -59,8 +59,7 @@ class CompTracker(commands.Cog):
         self.teams = TEAMS
         self.heroes = HEROES
         self.hero_matcher = HeroMatch(HEROES)  # Initialize HeroMatch with the HEROES dictionary 
-                                    # my testing channel |  comp-tracking
-        self.ALLOWED_CHANNELS_MOD = [1290751062256648212, 1301639621582520320]
+        self.ALLOWED_CHANNELS_MOD = [] #Set the allowed channels for commands
 
     @commands.command()
     async def teams(self, ctx: commands.Context):
@@ -83,7 +82,7 @@ class CompTracker(commands.Cog):
         # Scope for sheets & drive
         scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
         # Load credentials from .json file
-        creds = ServiceAccountCredentials.from_json_keyfile_name("C:\\Users\\LadyD\\AppData\\Local\\Programs\\Python\\Python312\\Projects\\HotsCalc\\snipey-bfcd3543a260.json", scope)
+        creds = ServiceAccountCredentials.from_json_keyfile_name("C:\\Users\\LadyD\\AppData\\Local\\Programs\\Python\\Python312\\Projects\\Tournament Helper\\snipey-bfcd3543a260.json", scope)
         client = gspread.authorize(creds)  # Authorize client to interact with sheets
         sheet = client.open("Snipey data")  # Open specific sheet
         worksheet = sheet.get_worksheet(1)  # Access the second worksheet
