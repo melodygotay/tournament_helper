@@ -30,16 +30,16 @@ async def confirmation_delete(confirmation: discord.Message, time: int):
         await confirmation.delete()
     except discord.HTTPException:
         pass  
-'''
+
 @bot.event
 async def on_ready():
-    channel_id = 1291010513819668500
+    channel_id = # personal channel ID
     channel = bot.get_channel(channel_id)
-    msg = "snipey has woken up!"
+    msg = "Enter wake up message"
     await channel.send(msg)
     await confirmation_delete(msg, 10)
     print(f'Logged in as {bot.user.name}')
-'''
+
 
 async def main():
     async with bot:
